@@ -5,3 +5,8 @@ The code was written using
 (1) Python 3.6 and Tensorflow 1.10.1 (directory tensorflow1), and
 
 (2) Python 3.8 and Tensorflow 2.3.1 (directory tensorflow2).
+
+**Port to TensorFlow 2.9 (this branch).** `tf.keras.experimental.PeepholeLSTMCell` no longer exists in
+TensorFlow 2.9, so `tensorflow2/vadermodel.py` uses TensorFlow Addons' copy of the same class,
+`tfa.rnn.PeepholeLSTMCell`, instead. That is the only source change. `requirements.txt` pins the versions
+it was run with on Python 3.10.
