@@ -1,4 +1,5 @@
 import tensorflow as tf
+import tensorflow_addons as tfa
 import numpy as np
 
 class ImputationLayer(tf.keras.layers.Layer):
@@ -78,8 +79,8 @@ class VaderModel(tf.keras.Model):
         if recurrent:
             if len(n_hidden) > 1:
                 if cell_type == "LSTM":
-                    encoder = tf.keras.experimental.PeepholeLSTMCell(n_hidden[0], activation=tf.nn.tanh, name="encoder")
-                    decoder = tf.keras.experimental.PeepholeLSTMCell(n_hidden[0], activation=tf.nn.tanh, name="decoder")
+                    encoder = tfa.rnn.PeepholeLSTMCell(n_hidden[0], activation=tf.nn.tanh, name="encoder")
+                    decoder = tfa.rnn.PeepholeLSTMCell(n_hidden[0], activation=tf.nn.tanh, name="decoder")
                 else:
                     encoder = tf.keras.layers.GRUCell(n_hidden[0], activation=tf.nn.tanh, name="encoder")
                     decoder = tf.keras.layers.GRUCell(n_hidden[0], activation=tf.nn.tanh, name="decoder")
@@ -92,9 +93,9 @@ class VaderModel(tf.keras.Model):
                 n_hidden = n_hidden[0]
                 if cell_type == "LSTM":
                     # one n_hidden for mu, one for sigma2
-                    encoder = tf.keras.experimental.PeepholeLSTMCell(
+                    encoder = tfa.rnn.PeepholeLSTMCell(
                         n_hidden + n_hidden, activation=tf.nn.tanh, name="encoder")
-                    decoder = tf.keras.experimental.PeepholeLSTMCell(n_hidden, activation=tf.nn.tanh, name="decoder")
+                    decoder = tfa.rnn.PeepholeLSTMCell(n_hidden, activation=tf.nn.tanh, name="decoder")
                 else:
                     # one n_hidden for mu, one for sigma2
                     encoder = tf.keras.layers.GRUCell(n_hidden + n_hidden, activation=tf.nn.tanh, name="encoder")
