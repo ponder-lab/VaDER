@@ -1,2 +1,5 @@
 # Written by VaDER/main.py, which saves its trained model under test_vader/.
 test_vader/
+
+# Python bytecode caches, written whenever the package is imported.
+__pycache__/
