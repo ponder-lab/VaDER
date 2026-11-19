@@ -405,7 +405,6 @@ class VADER:
 
         return rec_loss
 
-    @tf.function
     def _latent_loss(self, z, mu_c, sigma2_c, phi_c, mu_tilde, log_sigma2_tilde, K, eps=1e-10):
         sigma2_tilde = tf.math.exp(log_sigma2_tilde)
         log_sigma2_c = tf.math.log(eps + sigma2_c)
