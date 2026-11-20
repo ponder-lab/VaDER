@@ -41,7 +41,7 @@ class GmmLayer(tf.keras.layers.Layer):
             "sigma2_c_unscaled", shape=[K, n_hidden], initializer=tf.initializers.glorot_uniform())
         self.phi_c_unscaled = self.add_weight(
             "phi_c_unscaled", shape=[K], initializer=tf.initializers.glorot_uniform())
-    @tf.function(input_signature=[tf.TensorSpec(shape=(), dtype=tf.float32)])
+    @tf.function(reduce_retracing=True)
     def call(self, _):
         mu_c = self.mu_c_unscaled
         sigma2_c = tf.nn.softplus(self.sigma2_c_unscaled, name="sigma2_c")
